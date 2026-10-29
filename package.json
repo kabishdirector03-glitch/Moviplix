@@ -1,0 +1,32 @@
+{
+  "name": "moviplix",
+  "version": "1.0.0",
+  "description": "Moviplix - Hotstar-inspired streaming web platform with Drive integration and high speed database",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"node server/index.js\" \"npm --prefix client run dev\"",
+    "server": "node server/index.js",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client install && npm --prefix client run build",
+    "start": "node server/index.js"
+  },
+  "keywords": [
+    "hotstar",
+    "jiocinema",
+    "streaming",
+    "drive",
+    "movies"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
