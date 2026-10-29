@@ -87,7 +87,26 @@ app.use((req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`[Moviplix Backend] Server running on http://localhost:${PORT}`);
+const os = require('os');
+
+function getLocalIp() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return 'localhost';
+}
+
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  const localIp = getLocalIp();
+  console.log(`[Moviplix Server Online]`);
+  console.log(`  > Local:   http://localhost:${PORT}`);
+  console.log(`  > Network: http://${localIp}:${PORT}`);
   console.log(`[Moviplix Backend] Database initialized with WAL mode for ultra-fast response`);
 });
